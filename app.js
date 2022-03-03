@@ -1,6 +1,19 @@
-const _ = require('lodash');
+const http = require('http');
 
-const items = [1, [2, [3, [4]]]];
-const newItems = _.flattenDeep(items);
+// --- OPTION 1 with callback function (req, res)
+// const server = http.createServer((req, res) => {
+//     console.log('req: ', req);
+// });
 
-console.log('new items: ', newItems);
+// server.on('request', (req, res) => {
+//     res.end('Welcome');
+// })
+
+// --- OPTION 2 with event listener 'on'
+const server = http.createServer();
+
+server.on('request', (req, res) => {
+    res.end('Welcome!');
+})
+
+server.listen(8000);
