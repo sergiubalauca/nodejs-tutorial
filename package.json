@@ -2,7 +2,7 @@
   "name": "tutorial",
   "version": "1.0.0",
   "description": "",
-  "main": "10-fs-sync.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
