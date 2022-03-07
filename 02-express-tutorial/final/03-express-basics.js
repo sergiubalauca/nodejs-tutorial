@@ -1,27 +1,26 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 
-app.get('/', (req, res) => {
-  console.log('user hit the resource')
-  res.status(200).send('Home Page')
-})
+app.get("/", (req, res) => {
+  res.status(200).send("Home page");
+});
 
-app.get('/about', (req, res) => {
-  res.status(200).send('About Page')
-})
+app.get("/about", (req, res) => {
+  res.status(200).send("About page");
+});
 
-app.all('*', (req, res) => {
-  res.status(404).send('<h1>resource not found</h1>')
-})
+// we go with .all to cover all http verbs, cause we don't know what the user wants from an unkown route
+app.all("*", (req, res) => {
+  res.status(404).send("<h1>No page</h1>");
+});
+app.listen(8000, () => {
+  console.log("Server is listening on port 8000");
+});
 
-app.listen(5000, () => {
-  console.log('server is listening on port 5000...')
-})
-
-// app.get
-// app.post
-// app.put
-// app.delete
-// app.all
-// app.use
-// app.listen
+//app.get
+//app.post
+//app.put
+//app.delete
+//app.all -- works with all get, post, put, delete
+//app.use -- responsible for middleware
+//app.listen
