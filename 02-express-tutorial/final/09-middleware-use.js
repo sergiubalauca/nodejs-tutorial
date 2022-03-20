@@ -1,24 +1,27 @@
-const express = require('express')
-const app = express()
-const logger = require('./logger')
-const authorize = require('./authorize')
-//  req => middleware => res
-app.use([logger, authorize])
-// api/home/about/products
-app.get('/', (req, res) => {
-  res.send('Home')
-})
-app.get('/about', (req, res) => {
-  res.send('About')
-})
-app.get('/api/products', (req, res) => {
-  res.send('Products')
-})
-app.get('/api/items', (req, res) => {
-  console.log(req.user)
-  res.send('Items')
-})
+const express = require("express");
+const app = express();
+const logger = require('./utils/logger');
+const authorize = require('./utils/authorize');
+// order matters - so invoke this before the routes; we can also add a specific path where the middleware will work (base path)
+app.use('/api', [logger, authorize]);
 
-app.listen(5000, () => {
-  console.log('Server is listening on port 5000....')
-})
+app.get("/", (req, res) => {
+  res.send("Home");
+});
+
+app.get("/about", logger, (req, res) => {
+  res.send("About");
+});
+
+app.get("/api/products", (req, res) => {
+  res.send("Products");
+});
+
+app.get("/api/items", (req, res) => {
+  console.log('User: ', req.user);
+  res.send("Items");
+});
+
+app.listen(8000, () => {
+  console.log("Server listening on port 8000");
+});
